@@ -1,0 +1,542 @@
+# You can edit this file by hand, but it's recommended not to do that.
+
+# Marks:
+'H
+	/home/tnowacki/
+	..
+1658672065
+'b
+	/home/tnowacki/bin/
+	..
+1658672065
+'h
+	/home/tnowacki/
+	..
+1658672065
+'z
+	/home/tnowacki/.config/vifm
+	..
+1658672065
+
+# Bookmarks:
+
+# TUI:
+al
+q0
+v2
+ov
+m-1
+l2
+r2
+
+# Left window history (oldest to newest):
+d/home/tnowacki
+	..
+0
+d/home
+	..
+0
+d/
+	home
+4
+d/home
+	tnowacki
+1
+d/home/tnowacki
+	Picture
+4
+d/home/tnowacki/Picture
+	..
+0
+d/home/tnowacki
+	..
+0
+d/home
+	tnowacki
+1
+d/home/tnowacki
+	Wallpaper
+5
+d/home
+	tnowacki
+1
+d/home/tnowacki
+	.config
+3
+d/home/tnowacki/.config
+	..
+0
+d/home/tnowacki
+	Downloads
+15
+d/home/tnowacki/Downloads
+	..
+0
+d/home/tnowacki
+	GoogleDrive
+16
+d/home/tnowacki/GoogleDrive
+	..
+0
+d/home/tnowacki
+	GoogleDrive
+16
+d/home/tnowacki/GoogleDrive
+	Debian
+1
+d/home/tnowacki/GoogleDrive/Debian
+	..
+0
+d/home/tnowacki/GoogleDrive
+	..
+0
+d/home/tnowacki
+	Picture
+17
+d/home/tnowacki/Picture
+	..
+0
+d/home/tnowacki
+	Skrypty
+18
+d/home/tnowacki/Skrypty
+	..
+0
+d/home/tnowacki
+	notatki_sql
+22
+d/home/tnowacki/notatki_sql
+	..
+0
+d/home/tnowacki
+	notatki_sql
+22
+d/home/tnowacki/notatki_sql
+	..
+0
+d/home/tnowacki
+	notatki_sql
+22
+d/home/tnowacki/notatki_sql
+	..
+0
+d/home/tnowacki
+	..
+0
+d/home
+	..
+0
+d/
+	etc
+3
+d/etc
+	apt
+10
+d/etc/apt
+	sources.list.d
+6
+d/etc/apt/sources.list.d
+	..
+0
+d/etc/apt
+	sources.list.d
+6
+d/etc/apt/sources.list.d
+	..
+0
+d/etc/apt
+	keyrings
+3
+d/etc/apt/keyrings
+	..
+0
+d/etc/apt
+	apt.conf.d
+1
+d/etc/apt/apt.conf.d
+	..
+0
+d/etc/apt
+	listchanges.conf.d
+4
+d/etc/apt/listchanges.conf.d
+	..
+0
+d/etc/apt
+	..
+0
+d/etc
+	bash_completion.d
+12
+d/etc/bash_completion.d
+	..
+0
+d/etc
+	..
+0
+d/
+	var
+21
+d/var
+	..
+0
+d/
+	var
+21
+d/var
+	..
+0
+d/
+	var
+21
+d/var
+	..
+0
+d/
+	home
+4
+d/home
+	tnowacki
+1
+d/home/tnowacki
+	Downloads
+15
+d/home/tnowacki/Downloads
+	..
+0
+d/home/tnowacki
+	Wallpaper
+19
+d/home/tnowacki/Wallpaper
+	..
+0
+d/home/tnowacki
+	..
+0
+d/home
+	..
+0
+d/
+	home
+4
+d
+
+# Right window history (oldest to newest):
+D/home/tnowacki
+	GoogleDrive
+2
+D/home/tnowacki/GoogleDrive
+	Debian
+1
+D/home/tnowacki/GoogleDrive/Debian
+	..
+0
+D/home/tnowacki/GoogleDrive
+	Debian
+1
+D/home/tnowacki/GoogleDrive/Debian
+	..
+0
+D/home/tnowacki/GoogleDrive
+	Debian
+1
+D/home/tnowacki/GoogleDrive/Debian
+	notatki_sql
+4
+D/home/tnowacki/GoogleDrive/Debian/notatki_sql
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian
+	notatki_sql
+4
+D/home/tnowacki/GoogleDrive/Debian/notatki_sql
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian
+	notatki_sql
+4
+D/home/tnowacki/GoogleDrive/Debian/notatki_sql
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian
+	notatki_forcom
+3
+D/home/tnowacki/GoogleDrive/Debian/notatki_forcom
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian
+	.config
+1
+D/home/tnowacki/GoogleDrive/Debian/.config
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian
+	.config
+1
+D/home/tnowacki/GoogleDrive/Debian/.config
+	dconf
+6
+D/home/tnowacki/GoogleDrive/Debian/.config/dconf
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian/.config
+	BraveSoftware
+2
+D/home/tnowacki/GoogleDrive/Debian/.config/BraveSoftware
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian/.config
+	BraveSoftware
+2
+D/home/tnowacki/GoogleDrive/Debian/.config/BraveSoftware
+	Brave-Browser
+1
+D/home/tnowacki/GoogleDrive/Debian/.config/BraveSoftware/Brave-Browser
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian/.config/BraveSoftware
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian/.config
+	remmina
+15
+D/home/tnowacki/GoogleDrive/Debian/.config/remmina
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian/.config
+	ranger
+14
+D/home/tnowacki/GoogleDrive/Debian/.config/ranger
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian/.config
+	ranger
+14
+D/home/tnowacki/GoogleDrive/Debian/.config/ranger
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian/.config
+	ranger
+14
+D/home/tnowacki/GoogleDrive/Debian/.config/ranger
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian/.config
+	pulse
+12
+D/home/tnowacki/GoogleDrive/Debian/.config/pulse
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian/.config
+	neofetch
+9
+D/home/tnowacki/GoogleDrive/Debian/.config/neofetch
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian/.config
+	neofetch
+9
+D/home/tnowacki/GoogleDrive/Debian/.config/neofetch
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian/.config
+	vifm
+13
+D/home/tnowacki/GoogleDrive/Debian/.config/vifm
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian/.config
+	vifm
+13
+D/home/tnowacki/GoogleDrive/Debian/.config/vifm
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian/.config
+	rofi
+12
+D/home/tnowacki/GoogleDrive/Debian/.config/rofi
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian/.config
+	remmina
+11
+D/home/tnowacki/GoogleDrive/Debian/.config/remmina
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian/.config
+	qtile
+10
+D/home/tnowacki/GoogleDrive/Debian/.config/qtile
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian/.config
+	nvim
+9
+D/home/tnowacki/GoogleDrive/Debian/.config/nvim
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian/.config
+	mc
+8
+D/home/tnowacki/GoogleDrive/Debian/.config/mc
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian/.config
+	libfm
+7
+D/home/tnowacki/GoogleDrive/Debian/.config/libfm
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian/.config
+	kitty
+6
+D/home/tnowacki/GoogleDrive/Debian/.config/kitty
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian/.config
+	htop
+5
+D/home/tnowacki/GoogleDrive/Debian/.config/htop
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian/.config
+	gtk-3.0
+4
+D/home/tnowacki/GoogleDrive/Debian/.config/gtk-3.0
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian/.config
+	autostart
+3
+D/home/tnowacki/GoogleDrive/Debian/.config/autostart
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian/.config
+	Insync
+2
+D/home/tnowacki/GoogleDrive/Debian/.config/Insync
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian/.config
+	.mono
+1
+D/home/tnowacki/GoogleDrive/Debian/.config/.mono
+	keypairs
+1
+D/home/tnowacki/GoogleDrive/Debian/.config/.mono/keypairs
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian/.config/.mono
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian/.config
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian
+	Skrypty
+2
+D/home/tnowacki/GoogleDrive/Debian/Skrypty
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian
+	kitty
+3
+D/home/tnowacki/GoogleDrive/Debian/kitty
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian
+	notatki_forcom
+3
+D/home/tnowacki/GoogleDrive/Debian/notatki_forcom
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian
+	..
+0
+D/home/tnowacki/GoogleDrive
+	Debian
+1
+D/home/tnowacki/GoogleDrive/Debian
+	etc
+3
+D/home/tnowacki/GoogleDrive/Debian/etc
+	apt
+1
+D/home/tnowacki/GoogleDrive/Debian/etc/apt
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian/etc
+	..
+0
+D/home/tnowacki/GoogleDrive/Debian
+	etc
+4
+D
+
+# Command line history (oldest to newest):
+:help
+:za
+:copy
+:mkdir etc
+:mkdir apt
+:q
+
+# Search history (oldest to newest):
+
+# Prompt history (oldest to newest):
+
+# Local filter history (oldest to newest):
+
+# Registers:
+""/home/tnowacki/.local/share/vifm/Trash/000_kitty
+
+# Directory stack (oldest to newest):
+
+# Trash content:
+t/home/tnowacki/.local/share/vifm/Trash/000_google-chrome-beta
+	/home/tnowacki/GoogleDrive/Debian/.config/google-chrome-beta
+t/home/tnowacki/.local/share/vifm/Trash/000_freerdp
+	/home/tnowacki/GoogleDrive/Debian/.config/freerdp
+t/home/tnowacki/.local/share/vifm/Trash/000_dconf
+	/home/tnowacki/GoogleDrive/Debian/.config/dconf
+t/home/tnowacki/.local/share/vifm/Trash/000_GIMP
+	/home/tnowacki/GoogleDrive/Debian/.config/GIMP
+t/home/tnowacki/.local/share/vifm/Trash/000_BraveSoftware
+	/home/tnowacki/GoogleDrive/Debian/.config/BraveSoftware
+t/home/tnowacki/.local/share/vifm/Trash/000_ranger
+	/home/tnowacki/GoogleDrive/Debian/.config/ranger
+t/home/tnowacki/.local/share/vifm/Trash/000_pulse
+	/home/tnowacki/GoogleDrive/Debian/.config/pulse
+t/home/tnowacki/.local/share/vifm/Trash/000_pcmanfm
+	/home/tnowacki/GoogleDrive/Debian/.config/pcmanfm
+t/home/tnowacki/.local/share/vifm/Trash/000_neofetch
+	/home/tnowacki/GoogleDrive/Debian/.config/neofetch
+t/home/tnowacki/.local/share/vifm/Trash/000_QtProject.conf
+	/home/tnowacki/GoogleDrive/Debian/.config/QtProject.conf
+t/home/tnowacki/.local/share/vifm/Trash/000_mimeapps.list
+	/home/tnowacki/GoogleDrive/Debian/.config/mimeapps.list
+t/home/tnowacki/.local/share/vifm/Trash/000_okularrc
+	/home/tnowacki/GoogleDrive/Debian/.config/okularrc
+t/home/tnowacki/.local/share/vifm/Trash/000_pavucontrol.ini
+	/home/tnowacki/GoogleDrive/Debian/.config/pavucontrol.ini
+t/home/tnowacki/.local/share/vifm/Trash/000_gtk-3.0
+	/home/tnowacki/GoogleDrive/Debian/.config/gtk-3.0
+t/home/tnowacki/.local/share/vifm/Trash/000_autostart
+	/home/tnowacki/GoogleDrive/Debian/.config/autostart
+t/home/tnowacki/.local/share/vifm/Trash/000_Insync
+	/home/tnowacki/GoogleDrive/Debian/.config/Insync
+t/home/tnowacki/.local/share/vifm/Trash/000_.mono
+	/home/tnowacki/GoogleDrive/Debian/.config/.mono
+t/home/tnowacki/.local/share/vifm/Trash/000_kitty
+	/home/tnowacki/GoogleDrive/Debian/kitty
+
+# State:
+f
+i1
+[.0
+[F
+F
+I1
+].0
+]F
+s0

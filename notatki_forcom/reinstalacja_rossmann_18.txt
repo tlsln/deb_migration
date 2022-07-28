@@ -1,0 +1,72 @@
+# Instrukcja półautomatycznej reinstalacji Oracle 18 w sieci Rossmann v0.2 (około 2h)
+
+
+# W lokalizacji na terminalu, c:\temp\migracjaoracle1118rossmann powinny znajdować się wszystkie potrzebne pliki
+
+# wyłączenie usług, przestawienie w tryb wyłączony.
+
+sc config "Forsmann" start= disabled
+sc config "MarketService" start= disabled
+sc config "cashregisterserver" start= disabled
+sc config "ActiveMQ" start= disabled
+sc config "StoreTransactionSystem_Service" start= disabled
+sc stop "Forsmann"
+sc stop "cashregisterserver"
+sc stop "Jetty"
+sc stop "ActiveMQ"
+sc stop "MarketService"
+sc stop "Jetty6-Service"
+sc stop "OracleOraDB18Home1MTSRecoveryService"
+sc stop "StoreTransactionSystem_Service"
+taskkill /f /im SaleConnector.exe
+taskkill /f /im StoreTransactionSystem.exe
+taskkill /f /im DensoConnector.exe
+taskkill /f /im STSEstore.exe
+taskkill /f /im BonPrice.exe
+
+# zimny - jeśli nie mamy pewności czy baza jest spójna (tsn zmieniamy na własne inicjały)
+net stop oracleservicexe /Y
+mkdir C:\naprawa_%date%_tsn
+xcopy /E C:\oraclexe\app\oracle\product\18.0.0\oradata\XE C:\naprawa_%date%_tsn\XE\
+xcopy /E D:\ApplicationData\Backup\XE\ONLINELOG C:\naprawa_%date%_tsn\ONLINELOG\
+net start oracleservicexe
+
+# export bazy danych do lokalizacji C:\Temp\
+exp market3_user/for8667319com FILE=C:\Temp\Exp_market3_user.dat LOG=C:\Temp\Exp_market3_user.log
+exp cashregisterserver/for8667319com FILE=C:\Temp\Exp_cashregisterserver.dat LOG=C:\Temp\Exp_cashregisterserver.log
+
+#Skopiuj te pliki oldując stare dumpy do lokalizacji (nazwa musi być dokładnie taka jak poniższa):
+D:\Temp\MigracjaOracle1118Rossmann\Dumps\Exp_market3_user.dat
+D:\Temp\MigracjaOracle1118Rossmann\Dumps\Exp_cashregisterserver.dat
+
+# Przelogowujemy się na użytkownika systemowego ras i ręczne z poziomu appwiz.cpl odinstalowujemy Oracle 18 
+
+
+
+# !!! Usuwamy flagi od 4 do 17 z lokalizacji:
+d:\Temp\MigracjaOracle1118Rossmann\Flagi
+# oldujemy stary katalog logs i tworzymy nowy
+move D:\Temp\MigracjaOracle1118Rossmann\logs D:\Temp\MigracjaOracle1118Rossmann\logs_old
+mkdir D:\Temp\MigracjaOracle1118Rossmann\logs
+# uruchamiamy proces automatycznej instalacji i konfiguracji bazy skryptem autoitowym (proces działa w tle bez okna):
+d:\Temp\MigracjaOracle1118Rossmann\moja_migracja_v5.exe -2
+
+# cala moja_migracja może trwać do 1,5h, warningi w setup.log możemy zignorować.
+# w międzyczasie sprawdzamy logi D:\Temp\MigracjaOracle1118Rossmann\logs\ czy wszystko importuje się prawidłowo
+
+# włączenie usług
+sc config "ActiveMQ" start= auto
+sc config "Forsmann" start= auto
+sc config "MarketService" start= auto
+sc config "cashregisterserver" start= auto
+sc config "StoreTransactionSystem_Service" start= auto
+net start "ActiveMQ"
+net start "Forsmann"
+net start "MarketService"
+net start "cashregisterserver"
+net start "Jetty6-Service"
+net start "StoreTransactionSystem_Service"
+
+#Przelogowanie na użytkownika systemowego Rossmann
+login: Rossmann hasło: Rossmann
+uruchomienie marketu zalogowanie na użytkownika rossmann hasło: scan08$

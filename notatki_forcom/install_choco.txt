@@ -1,0 +1,26 @@
+choco install googlechrome -y
+choco install javaruntime -y
+choco install mobaxterm -y
+choco install putty.install -y
+choco install ultravnc -y
+choco install totalcommander -y
+choco install vlc -y
+choco install notepadplusplus -y
+choco install silverlight -y
+choco install sysinternals -y
+choco install autohotkey -y
+choco install sumatrapdf.install -y
+choco install libreoffice-fresh -y
+choco install winscp.install -y
+choco install spotify -y
+choco install microsoft-windows-terminal -y
+choco install vim -y
+choco install keepass -y
+choco install virtualbox -y
+choco install 7zip.install -y
+choco install windirstat-y
+choco install as-ssd-y
+choco install dropbox-y
+choco install joplin-y
+choco install evernote-y
+choco install python -y

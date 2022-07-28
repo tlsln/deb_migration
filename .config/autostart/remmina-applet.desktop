@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Aplet klienta zdalnego pulpitu Remmina
+Comment=Połącz się ze zdalnymi komputerami za pomocą menu apletu
+Icon=org.remmina.Remmina
+Exec=remmina -i
+Terminal=false
+Type=Application
+Hidden=true

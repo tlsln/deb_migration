@@ -1,0 +1,11 @@
+configuration {
+	modi: "combi,run,drun,window,windowcd,keys,ssh";
+	width: 50;
+	lines: 16;
+	show-icons: true;
+	icon-theme: "Papirus";
+	hide-scrollbar: true;
+	fake-transparency: true;
+	location: 2;
+}
+@import "/usr/share/rofi/themes/Arc-Dark.rasi"

@@ -1,0 +1,35 @@
+2022/07/25-14:26:20.376 3321f Creating DB /home/tnowacki/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/chrome-extension_oeopbcgkkoapgobdbedcemjljbihmemj_0.indexeddb.leveldb since it was missing.
+2022/07/25-14:26:20.391 3321f Delete type=3 #1
+2022/07/25-22:38:22.153 6dbc5 Level-0 table #5: started
+2022/07/25-22:38:22.219 6dbc5 Level-0 table #5: 755337 bytes OK
+2022/07/25-22:38:22.226 6dbc5 Delete type=0 #3
+2022/07/26-06:51:21.767 a884c Level-0 table #7: started
+2022/07/26-06:51:21.861 a884c Level-0 table #7: 745143 bytes OK
+2022/07/26-06:51:21.864 a884c Delete type=0 #4
+2022/07/26-06:52:22.238 a9123 Compacting 1@1 + 1@2 files
+2022/07/26-06:52:22.350 a9123 Generated table #8@1: 42 keys, 1437 bytes
+2022/07/26-06:52:22.350 a9123 Compacted 1@1 + 1@2 files => 1437 bytes
+2022/07/26-06:52:22.353 a9123 compacted to: files[ 0 0 1 0 0 0 0 ]
+2022/07/26-06:52:22.353 a9123 Delete type=2 #5
+2022/07/26-06:52:22.353 a9123 Delete type=2 #7
+2022/07/26-15:03:51.783 e1fd8 Level-0 table #10: started
+2022/07/26-15:03:51.867 e1fd8 Level-0 table #10: 749320 bytes OK
+2022/07/26-15:03:51.892 e1fd8 Delete type=0 #6
+2022/07/26-15:05:22.737 ddf46 Compacting 1@1 + 1@2 files
+2022/07/26-15:05:22.790 ddf46 Generated table #11@1: 39 keys, 1333 bytes
+2022/07/26-15:05:22.790 ddf46 Compacted 1@1 + 1@2 files => 1333 bytes
+2022/07/26-15:05:22.794 ddf46 compacted to: files[ 0 0 1 0 0 0 0 ]
+2022/07/26-15:05:22.795 ddf46 Delete type=2 #10
+2022/07/26-15:05:22.812 ddf46 Delete type=2 #8
+2022/07/26-21:21:48.698 119677 Level-0 table #13: started
+2022/07/26-21:21:49.180 119677 Level-0 table #13: 580910 bytes OK
+2022/07/26-21:21:49.328 119677 Delete type=0 #9
+2022/07/26-21:21:49.329 11a8f3 Manual compaction at level-0 from (begin) .. (end); will stop at (end)
+2022/07/26-21:21:49.377 11a8f3 Manual compaction at level-1 from (begin) .. (end); will stop at '\x00\x01\x01\x02\x01\x0b\x00u\x00n\x00r\x00e\x00a\x00d\x00C\x00o\x00u\x00n\x00t' @ 177453 : 1
+2022/07/26-21:21:49.377 11a8f3 Compacting 1@1 + 1@2 files
+2022/07/26-21:21:49.499 11a8f3 Generated table #14@1: 37 keys, 1280 bytes
+2022/07/26-21:21:49.499 11a8f3 Compacted 1@1 + 1@2 files => 1280 bytes
+2022/07/26-21:21:49.600 11a8f3 compacted to: files[ 0 0 1 0 0 0 0 ]
+2022/07/26-21:21:49.601 11a8f3 Delete type=2 #13
+2022/07/26-21:21:49.601 11a8f3 Delete type=2 #11
+2022/07/26-21:21:49.601 117d83 Manual compaction at level-1 from '\x00\x01\x01\x02\x01\x0b\x00u\x00n\x00r\x00e\x00a\x00d\x00C\x00o\x00u\x00n\x00t' @ 177453 : 1 .. (end); will stop at (end)

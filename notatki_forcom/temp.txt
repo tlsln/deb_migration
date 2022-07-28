@@ -1,0 +1,347 @@
+pol.schiever\partner_forcom
+F0rC0m2021@!#
+Radom
+L@Cl@rC.2013
+hds.ad\fserwis	JgrZ!X1aq
+QoNG3>v%Drem639a
+!QAZ0p;/
+=========================================================================================================================================
+#Robocze
+
+sed -i 's/SQLNET.AUTHENTICATION_SERVICES= (none)/SQLNET.AUTHENTICATION_SERVICES= (NTS)/g' /cygdrive/e/oraclexe/app/oracle/product/18.0.0/dbhomeXE/network/admin/sqlnet.ora
+sed -i 's/SQLNET.AUTHENTICATION_SERVICES= (NTS)/SQLNET.AUTHENTICATION_SERVICES= (none)/g' /cygdrive/e/oraclexe/app/oracle/product/18.0.0/dbhomeXE/network/admin/sqlnet.ora
+cat /cygdrive/e/oraclexe/app/oracle/product/18.0.0/dbhomeXE/network/admin/sqlnet.ora
+=========================================================================================================================================
+
+net use R: /delete 
+net use R: \\sshfs\kasa@kasa02.10.8.24.79
+
+
+
+=========================================================================================================================================
+Temat kill oracla. Sprawdzić w GAM "Brak połączenia z serwerem", "Wolne działanie kasy", "Problem z uruchomieniem marketu" i potem history w bashu. 
+=========================================================================================================================================
+modem Comtrend
+
+exp market_user/for8667319com@localhost/xepdb1 FILE=market.dmp LOG=m.log
+
+
+imp market_user/for8667319com FILE=market.dmp LOG=m_imp.log
+
+imp cashregisterserver/for8667319com FILE=c.dmp LOG=c.log
+
+
+
+alter PLUGGABLE DATABASE xepdb1 close;
+DROP PLUGGABLE DATABASE xepdb1 INCLUDING DATAFILES;
+
+53604 dobrze
+54604 źle
+
+54604 
+
+2 miesiące nie działał, chcieli zrobić roztowarowanie, dysk był uszkodzony, najnowszy dump był z kwietnia, Fieducik stwierdził żeby postawić od zera. 
+
+wysokobranżowe palenie 
+towarów nie pokazuje 
+
+Maciej Krużel - ruch 815472
+komunikaty z marketu 
+
+10.10.128.194
+
+
+\\10.20.52.130\market\Market.exe -U market_user -I 10.20.52.130 -S XE -DIRECT
+
+61163 - cygwin 
+
+
+POSTAWIENIE HDS OD ZERA
+========================
+- za-inserowanie informacji o PSCN-ie.
+Na centrali: select * from export e where e.ldofirmaref=(select f.LFIRMAREF from firma f where f.inrfirmy='XXXXX')order by e.DCZASEXPORTU desc;
+Na sklepie:  insert into export e (e.LEXPORTREF, e.INREXPORTU, e.EXPORTEDDATADATE, e.LUZYTKREF, e.SLOGNAME)values (newref(), nr_exp_z_centrali, data_ost_exp_z_centrali_5_cyfr, 2, 'logname');
+- zmiana numerację dokumentów zgodnie z Centralą
+    - wyszukując dokumenty od początku miesiąca w Centrali lub
+    - select d.NTYP, d.NPODTYP, max(d.SNUMER) from dok d where d.LPSREF = (select lfirmaref from firma f where f.INRFIRMY=34517) and d.CZASKSIEG >=42401 group by d.NTYP, d.NPODTYP (Uwaga: 2 typy mogą się powtórzyć)
+
+- podbicie sekwencerów o xxxxxxxxx zgodnie z:
+--Najpierw trzeba z Centrali wyciągnąć największego ref'a. 
+ 
+    select greatest(
+    (select max(d.LDOKREF) from dok d where d.LPSREF = (select lfirmaref from firma f where f.INRFIRMY=XXXXX))
+    , (select max(dp.LDOKPOZREF) from dokpoz dp where dp.LPSREF = (select lfirmaref from firma f where f.INRFIRMY=XXXXX)))
+    from dual
+ 
+--Następnie wykonujemy już na sklepie:
+     
+    alter sequence autoinc increment by x;      -- gdzie "x" to maxref z Centrali minus aktualna wartość sekwencji autoinc w markecie plus 9999
+    select * from user_sequences                -- sprawdzamy aktualną wartość autoinc
+ 
+--Wywołanie poniższego zapytania spowoduje, że newref zwiększy się o podany wcześniej x.
+ 
+    select newref from dual;
+ 
+--Następnie przywracamy skok o 1:
+     
+    alter sequence autoinc increment by 1;
+	
+- wgranie czystych baz kasowych i wysłanie danych
+
+
+
+badania okresowe - do 5 lipca - jak będzie koniec epidemii - pół roku na zrobienie tych badań - medycyna pracy - 
+Poznańska 55a - 
+
+Komputer zapleczowy: 10.10.103.27
+Kasa 1 (serwer): 10.10.103.20
+Drukarka bar :10.10.103.29       ----> XXXXX
+Drukarka kuchnia:10.10.103.30
+
+
+Helpde$k123
+
+użytkownik HDS_AD\forcomhd
+na adresie 195.178.123.195 - kastor.hds.pl
+
+
+10.20.27.34
+
+
+10.10.16.99 - kasa 2 - dysk c: 
+
+71158 - 10.20.81.98
+
+
+ORA-01578: ORACLE data block corrupted (file # 4, block # 446133)
+ORA-01110: data file 4: 'C:\ORACLEXE\APP\ORACLE\ORADATA\XE\USERS.DBF'
+ORA-06512: at "MARKET_USER.OPERATION_TIME_LOGGER", line 29
+ORA-06512: at "MARKET_USER.OPERATION_TIME_LOGGER", line 180
+ORA-06512: at "MARKET_USER.OPERATION_TIME_LOGGER", line 270
+ORA-06512: at line 2
+
+
+
+select tablespace_name, segment_type, owner, segment_name from dba_extents where file_id = 4 and 446132 between block_id AND block_id + blocks-1;
+PARAGNAG
+
+SYS_C008916
+
+
+SELECT TO_ORACLE_DATE(MAX(PN.DATA)) FROM PARAGNAG PN
+
+
+
+1
+Paweł Batura
+Adam Wojciechowski
+Mateusz Rothe
+Dawid Wojciechowski
+Natalia Mielcarek
+
+
+2
+Jacek 	Stachecki
+Justyna Szofińska
+Joanna Pawłowska
+Kornel Stoiński
+Szabelska Katarzyna
+
+
+10.20.55.34 - 59111
+10.10.102.50 -57601
+
+
+10.10.23.114
+ssh://fserwis@10.10.23.114:/cygdrive/e/oraclexe/app/oracle/product/18.0.0/diag/rdbms/xe/xe/trace/alert_xe.log
+
+dodać dostęp do nagios ruch 
+ustawić kleinta oracla żeby można było łączyć się na hds-y bez błędów 
+
+=========================================================================================================================================
+Zasady rekrutacji, doractwo zawodowe,
+W jednym wniosku można podać nie więcej niż 6 szkół i obok tego można wypisać kilka klas w danej szkole (to zwiększa szanse żeby dostać się do konretkej szkoły)
+Decyduje kolejność klas, które dopisujemy. 
+
+Wypełnij wniosek na stronie internetowej. Wypełnienie arkusza danych osobych. Arkusz wyboru szkół i klas (wypisać nazwy klas aby je odnaleźć). Potem można poprzesuwać kolejność klas i szkół.
+Wybór kryteriów uzupełniających - tak lub nie oraz oświadczenia (oświadczenie niepełnosprawności?). Zakończ. To nie jest koniec złożenia wniosku. To jest zapisane w systemie. Nazwa użytkownika i hasło - zapisać. 
+Przez tą nazwę i hasło będzie potrzeba zalogowania się na stronie. Uczeń drukuje wniosek, podpisujemy, skanowanie. Następnie dostarczamy do szkoły 1 wyboru. 
+Albo przez system nabór, albo wysyłamy, albo składamy do skrzytnki podawczej. Najlepiej przez system nabór, składanie poprzez SYSTEMU NABÓR. 
+Poza składaniem wniosku dla technikum należy mieć zdolność, skierowanie na bezpłatne badanie lecznice. 
+Od 24 czerwca do 12 lipca. Uzupełnienie wniosku o świadectwo ukończenia szkoły podstawowej, zaświadczenie o wniosku egzaminu ósmoklasisty.
+16 maja - dana szkoła daje zaświadczenie lekarskie technikum
+1 lipca termin ogłoszenia wyników egzadminu poprzez https://wyniki.edu.pl/login
+8 lipca wydawane zaświadczenie o wyniku egzaminu
+20 lipcy - ogłoszenie listy kandytatów przyjętych do szół. 
+do 1 sierpnia do godziny 15:00 należy złożyć wolę przyjęcia! 
+2 sierpnia - dowiadujesz się do której szkoły zostałeś ostatecznie przyjęty
+3 sierpnia - rekrutacja uzupełniająca
+
+14 maja od 9 do 11:00 webinarium prowadzone przez centrum doractwa zawodowego w formie online
+
+Moje zapytanie szuka wszystkie warunki ktore maja zdublowana date do w tym będą tez warunki do nieskonczonosci 
+SELECT s.PRODUCTID, s.ENDDATE , COUNT(*)
+FROM salecondition s
+GROUP BY s.PRODUCTID , s.ENDDATE
+HAVING COUNT(*) > 1 ;
+
+Zapytanie od matiego na sprawdzenie dubli z data do nieksonczonosci
+select s.PRODUCTID, count(s.ENDDATE) from SALECONDITION s where s.ENDDATE = '9998-12-31'  group by s.PRODUCTID, s.ENDDATE HAVING count(s.ENDDATE) > 1 order by 2 desc
+
+ALTER SYSTEM SET "_allow_resetlogs_corruption"= FALSE SCOPE = SPFILE;
+
+CREATE UNDO TABLESPACE undo2 datafile 'E:\oraclexe\app\oracle\product\18.0.0\oradata\XE\undo02.dbf' size 200m autoextend on maxsize 10G;
+
+-U market_user -A 10.202.101.136/xe -I 10.202.101.136 -S xe -direct -dbmonitor
+
+C:\temp\Market_21_1_p55\Market\Market.exe -U market_user -A 10.202.101.136/xe -I 10.202.101.136 -S xe -dbmonitor
+
+net localgroup ORA_ASMDBA hds.ad\fserwis /add
+net localgroup ORA_DBA hds.ad\fserwis /add
+net localgroup ORA_OraDB18Home2_SYSBACKUP hds.ad\fserwis /add
+net localgroup ORA_OraDB18Home2_SYSDG hds.ad\fserwis /add
+net localgroup ORA_OraDB18Home2_SYSKM hds.ad\fserwis /add
+net localgroup Administrators hds.ad\fserwis /add
+
+=========================================================================================================================================
+=========================================================================================================================================
+#ŚMIETNISKO
+wget -c ftp://market:65434hds@195.178.123.195/snd/market_15_3.zip
+echo y | chkdsk /f c:
+echo y | chkdsk /f d:
+echo y | chkdsk /f e:
+echo y | chkdsk /f f:
+
+schtasks /Delete /TN Backup_xe
+schtasks /Delete /TN Backup_lite
+=========================================================================================================================================
+=========================================================================================================================================
+# find w linux, cygdrive, przykłady
+'odnalezienie ciągu znaków w logach aplikacji kasowej i wyświetlenie dodatkowych 2 linijek do góry i do dołu od wystąpienia ciągu'
+find /cygdrive/d/Aplikacje/forcom/cashregister/log -type f -exec grep -H -C2 '2100147925889' {} \;
+find /cygdrive/d/Aplikacje/forcom/cashregister/log -type f -exec grep -H -C2 'error:' {} \;
+
+=========================================================================================================================================
+=========================================================================================================================================
+# DUMP HDS DUMP HDS DUMP HDS DUMP HDS DUMP HDS DUMP HDS DUMP HDS DUMP HDS DUMP HDS DUMP HDS 
+# UWAGA poprawić datę w poniższych poleceniach!!!
+exp market_user/for8667319com FILE=e:\dane\market\dumpy\market_2021-15-11.dmp LOG=e:\dane\market\wersje\exp_market1.log
+exp market_user/for8667319com FILE=q:\market_2016-05-27.dmp LOG=e:\dane\market\wersje\exp_market2.log
+exp cashregisterserver/for8667319com FILE=e:\dane\market\dumpy\serwer_2021-15-11.dmp LOG=e:\dane\market\wersje\exp_serwer1.log
+exp cashregisterserver/for8667319com FILE=q:\serwer_2016-05-27.dmp LOG=e:\dane\market\wersje\exp_serwer2.log
+=========================================================================================================================================
+=========================================================================================================================================
+#WERYFIKACJA DZIAŁANIA PINPADA RUCH
+1. Config.xml: <EftPaymentsEnabled>true</EftPaymentsEnabled> - sprawdź
+2. Devices.xml:
+<Device classname="CashRegister.Devices.PinPad" assembly="CashRegister.Devices">
+    <Provides>PinPad</Provides>
+    <Driver classname="CashRegister.Drivers.Others.PinPadDriver.PinPadDriver" assembly="CashRegister.Drivers.Others.PinPadDriver">
+      <Driver classname="System.IO.Ports.SerialPort" assembly="System">
+        <PortName>COM2</PortName>
+        <BaudRate>19200</BaudRate>
+        <DataBits>8</DataBits>
+        <Parity>2</Parity>
+        <StopBits>1</StopBits>
+        <WriteTimeout>10000</WriteTimeout>
+        <ReadTimeout>10000</ReadTimeout>
+        <RtsEnable>true</RtsEnable>
+      </Driver>
+      <ClosePortAfterCommandMode>0</ClosePortAfterCommandMode>
+    </Driver>
+  </Device>
+3. W Markecie płatność "Karta płatnicza" ma ustawiony parametr "Definicja dla kasy (tekst)" na "pinpadany" - sprawdź
+4. Modem: przekierowanie WAN:9345 -> 192.168.1.2:9345 - sprawdź
+=========================================================================================================================================
+=========================================================================================================================================
+#funkcje do przesłania po przebudowie kasy market 3:
+605 - zapis danych do kas nagłówek 
+424 - przesłanie danych podstawowych 
+603 - Przesłanie wszystkich PLU 
+421 - przesłanie aktualnych plu 
+425 - wysłanie promocji 
+=========================================================================================================================================
+=========================================================================================================================================
+@for /l %i in (51,1,119) do @(echo ........................................ & echo IP Kasy : %i & plink -pw kasa02 kasa@172.16.109.%i "sed -i.old 's/<ReportType>1/<ReportType>0/g' /home/kasa/cashregister/configuration/Config.xml")
+=========================================================================================================================================
+@for /l %i in (11,1,11) do @(pscp -pw kasa02 %i/home/kasa/cashregister/configuration/Config.xml kasa@172.16.205.%i:/home/kasa/cashregister/configuration/)
+Jak cos pójdzie nie tak to z lokalizacji e:\rest.backup.bglowik\backup można puścić to samo.
+
+@for /l %i in (11,1,53) do @(echo ........................................ & echo IP Kasy : %i & plink -pw kasa02 kasa@172.16.200.%i "cat /home/kasa/cashregister/configuration/Config.xml | grep AllowNegativeReceiptValue && cat /home/kasa/cashregister/configuration/Config.xml | grep FinancialTransactionsOnFiscalReceiptEnabled" & echo ........................................) >>C:\temp\_logkas_check_config.txt
+
+@for /l %i in (11,1,53) do @(plink -pw kasa02 kasa@172.16.200.%i "sed -i 's/AllowNegativeReceiptValue>false</AllowNegativeReceiptValue>true</g' /home/kasa/cashregister/configuration/Config.xml")
+
+@for /l %i in (11,1,53) do @(mkdir %i && pscp -pw kasa02 
+kasa@172.16.200.%i:/home/kasa/cashregister/configuration/Config.xml %i/)
+
+@for /l %i in (11,1,53) do @(pscp -pw kasa02 %i/Config.xml 
+kasa@172.16.200.%i:/home/kasa/cashregister/configuration/)
+
+@for /l %i in (51,1,51) do @(echo ........................................ & echo IP Kasy : %i & plink -pw kasa02 kasa@172.16.109.%i "sed -i.old 's/AskForPrintingConfirmation>true/AskForPrintingConfirmation>false/g' /home/kasa/cashregister/configuration/Config.xml")
+
+for /l %p in (11,1,44) do mkdir K%p
+for /l %p in (41,1,71) do winscp.exe /console /command "open scp://kasa:kasa02@10.22.11.%p" "cd cashregister/configuration/" "option transfer binary" "get Config.xml e:\dane\market\TEMP\Backup_konfiguracji\K%p\" "exit"
+for /l %p in (41,1,43) do winscp.exe /console /command "open scp://kasa:kasa02@10.22.11.%p" "cd cashregister/configuration/" "option transfer binary" "put e:\dane\market\TEMP\Backup_konfiguracji\K%p\Config.xml" "exit"
+
+winscp.exe /console /command "open scp://kasa:kasa02@10.22.11.41" "cd cashregister/configuration/" "option transfer binary" "get Config.xml e:\dane\market\TEMP\Backup_konfiguracji\K41\" "exit"
+winscp.exe /console /command "open scp://kasa:kasa02@10.22.11.41" "cd cashregister/configuration/" "option transfer binary" "put e:\dane\market\TEMP\Backup_konfiguracji\K41\Config.xml"
+winscp.exe /console /command "open scp://kasa:kasa02@10.22.11.66" "cd cashregister/configuration/" "option transfer binary" "put e:\dane\market\TEMP\Backup_konfiguracji\K66\Config.xml"
+
+=========================================================================================================================================
+=========================================================================================================================================
+SELECT d.DOCUMENTID, d.DOCUMENTNUMBER, d.ADDITIONALINFORMATION
+FROM document d where ADDITIONALINFORMATION like '%&#x1F;%';
+select f.*, utl_raw.cast_to_raw(f.VALUE) from DOCFEAT_FEATURE_VIEW f
+where upper(utl_raw.cast_to_raw(f.VALUE)) like '%1F%';
+SELECT d.DOCUMENTID, d.DOCUMENTNUMBER, d.ADDITIONALINFORMATION FROM document d where ADDITIONALINFORMATION like '%&#x1F;%';
+=========================================================================================================================================
+=========================================================================================================================================
+create table PURCHASECONDITION_Backup as select * from PURCHASECONDITION;
+delete from PURCHASECONDITION pc where pc.ENDDATE < '2014-12-05';   (2014-12-05 = dziś  !)
+net stop marketservice
+C:\forcom\aplikacje\forcom\Market3\Forcom.Market.ConsoleCommandRunner.exe /dbverify - operation=RebuildAllIndexes
+=================================================================================
+plink -pw nixdorf root@172.16.111.43 "echo -n sysconfig: && grep gw\> /etc/sysconfig.xml && echo -n interfaces: && grep gateway //etc/network/interfaces"
+plink -pw nixdorf root@172.16.111.43 "grep -i usedns /etc/ssh/sshd_config || (echo -e "\\nUseDNS no" >>/etc/ssh/sshd_config && /etc/init.d/ssh reload)"
+plink -pw nixdorf root@172.16.111.43 "sed -i 's/<gw>172.16.111.5</<gw>172.16.111.1</g' /etc/sysconfig.xml"
+plink -pw nixdorf root@172.16.111.43 "sed -i 's/gateway 172.16.111.5/gateway 172.16.111.1/g' /etc/network/interfaces"
+plink -pw nixdorf root@172.16.111.43 "/etc/init.d/networking restart && /etc/init.d/networking restart" 
+plink -pw nixdorf root@172.16.111.43 "/etc/init.d/networking restart && /etc/init.d/networking restart" 
+plink -pw nixdorf root@172.16.111.43 "sed -i 's/<gw>172.16.111.5</<gw>172.16.111.1</g' /etc/sysconfig.xml"
+=========================================================================================================================================
+=========================================================================================================================================
+1. Najpierw kopiujemy pliki z następujących lokalizacji:
+serwer kasowy
+0:/FORCOM/!WERSJE/!WERSJE_PRODUKCYJNE/CashRegisterServer/1.12.5337.13879/ 
+do
+\\192.168.x.x\d$\forcom\inne\update_files\
+market
+0:/FORCOM/!WERSJE/!WERSJE_PRODUKCYJNE/Market3/
+do
+\\192.168.x.x\d$\forcom\market_update\
+2. Aktualizujemy serwer kasowy uruchamiamy:
+Uruchamiamy plik d:\forcom\inne\update_files\update_cashregisterserwer.cmd
+3.Aktualizujemy market, poprostu go uruchamiając
+4. Aktualizujemy wersję wrzucając do
+c:\forcom\aplikacje\forcom\cashregister\updates\
+i uruchamiamy manualny upgrade na kasie
+=========================================================================================================================================
+=========================================================================================================================================
+#TYMCZASOWE GLOBALNE PROBLEMY
+"asystent zamawiania RUCH"
+Zawieszony program market podczas wykonywania zamówienia przez asystenta zamawiania.
+Wykonano przeliczenie statystyk bazy danych. Ponowne uruchomienie programu market. Asystent zamawiania działa prawilowo.
+=========================================================================================================================================
+# ME # ME# ME# ME# ME# ME# ME# ME# ME# ME# ME# ME# ME# ME
+d:\forcom\dane\ApplicationData\Market3\Logs\
+--
+Jeśli występuje błąd prepaida World of Tanks: 
+select * from product p where p.PRODUCTINDEX = '845678';
+update PRODUCT P set p.ADDITIONALINFO = null where p.PRODUCTID = '53992243';
+Następnie przesłano Wszystkie PLU na kasy.
+
+# FTP skrót do MC
+market@195.178.123.195
+
+=========================================================================================================================================
+

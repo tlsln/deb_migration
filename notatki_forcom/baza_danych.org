@@ -1,0 +1,612 @@
+* Weryfikacja DB
+
+# weryfikacja wersji bazy
+echo $'SELECT * FROM v$version WHERE banner LIKE \'Oracle%\';' | sqlplus / as sysdba
+# wyświetlanie logów bazy
+tail -f /cygdrive/e/oraclexe/app/oracle/diag/rdbms/xe/xe/trace/alert_xe.log
+tail -n 1000 /cygdrive/e/oraclexe/app/oracle/admin/XE/bdump/alert_xe.log # dla ora10
+tail -n 1000 /cygdrive/e/oraclexe/app/oracle/diag/rdbms/xe/xe/trace/alert_xe.log # dla ora11
+tail -n 1000 /cygdrive/e/oraclexe/app/oracle/product/18.0.0/diag/rdbms/xe/xe/trace/alert_xe.log # dla ora18
+# sprawdź logi backupu
+cat /cygdrive/e/oraclexe/app/oracle/product/18.0.0/dbhomexe/database/OXE_BACKUP_CURRENT.LOG
+# kontenery, zmiana konteneru
+alter session set container=xepdb1;
+# wyświetlanie informacji o kontenrach:
+select * from v$pdbs;
+select * from x$con;
+# nazwa bazy danych
+select name from v$database;
+# redo log files
+SELECT MEMBER FROM V$LOGFILE;
+# pliki bazodanowe, lokalizaję, nazwy
+SELECT NAME FROM V$DATAFILE;
+# plik kontrolny, informację o pliku kontrolnym CONTROLFILE:
+SELECT VALUE FROM V$PARAMETER WHERE NAME = 'control_files';
+# zadania w bazie
+select * from DBA_SCHEDULER_JOB_RUN_DETAILS d order by d.LOG_ID desc;
+select * from DBA_SCHEDULER_JOBS;
+
+* Uruchomienie i zatrzymanie usług
+** Dla DELEK:
+net stop Market2Service
+taskkill /f /im Market2Service.exe
+net stop cashregisterserver
+net stop "Serwer Wagowy"
+net stop PerspectivService
+net stop PriceCheckService
+sc config PerspectivService start= disabled
+sc config cashregisterserver start= disabled
+sc config Market2Service start= disabled
+sc config PriceCheckService start=disabled
+taskkill /f /im PerspectivService.exe
+taskkill /f /im Market2Service.exe
+# ============================================================
+sc config PerspectivService start= auto
+sc config cashregisterserver start= auto
+sc config PriceCheckService start=auto
+sc config Market2Service start= auto
+net start Market2Service
+net start cashregisterserver
+net start "Serwer Wagowy"
+net start "Perspective Service"
+net start PriceCheckService
+
+** Dla HDS:
+net stop cashregisterserver
+net stop Forcom.Market2Service
+net stop FTPClientService
+net stop MonitService
+net stop "Perspectiv Service"
+sc config cashregisterserver start= disabed
+sc config Forcom.Market2Service start= disabled
+sc config FTPClientService start= disabled
+sc config MonitService start= disabled
+sc config Perspectiv\Service start= disabled
+sc config Perspectiv\Service start= disabled
+taskkill /f /im market_upgrade.exe
+taskkill /f /im imp_eia.exe
+taskkill /f /im HDS_Exporter.exe
+taskkill /f /im FTPClient.exe
+taskkill /f /im FTPClientService.exe
+taskkill /f /im Market2Service.exe
+taskkill /f /im monitservice.service.exe
+taskkill /f /im market.exe
+taskkill /f /im sftp-server.exe
+taskkill /f /im TOTALCMD.EXE
+taskkill /f /im Forcom.Makret2Service
+# ============================================================
+sc config cashregisterserver start= auto
+sc config Forcom.Market2Service start= auto
+sc config FTPClientService start= auto
+sc config MonitService start= auto
+sc config Perspectiv\Service start= auto
+net start Forcom.Market2Service
+net start FTPClientService
+net start cashregisterserver
+net start MonitService
+net start "Perspectiv Service"
+
+** Dla Ruch Restart Usług:
+net stop cashregisterserver
+net stop Market2Service
+net stop FTPClientService
+net stop "Perspectiv Service"
+sc config cashregisterserver start= disabled
+sc config Market2Service start= disabled
+sc config FTPClientService start= disabled
+sc config Perspectiv\Service start= disabled
+taskkill /f /im Market2Service.exe
+taskkill /f /im CashRegisterWin.exe
+taskkill /f /im DesktopLocker.exe
+taskkill /f /im MarketConsoleImporter.exe
+taskkill /f /im Market.exe
+taskkill /f /im Fire.exe
+taskkill /f /im importuj.exe
+taskkill /f /im FTPClientService.exe
+taskkill /f /im DesktopLocker.exe
+taskkill /f /im rman.exe
+taskkill /f /im mc.exe
+# ============================================================
+sc config cashregisterserver start= auto
+sc config Market2Service start= auto
+sc config FTPClientService start= auto
+sc config Perspectiv\Service start= auto
+net start cashregisterserver
+net start Market2Service
+net start FTPClientService
+net start "Perspectiv Service"
+
+ls /cygdrive/f/Backup/XE/ARCHIVELOG/
+rm -rf /cygdrive/f/Backup/XE/ARCHIVELOG/201[1-8]*
+
+ls /cygdrive/f/Backup/XE/BACKUPSET
+rm -rf /cygdrive/f/Backup/XE/BACKUPSET/201[1-8]*
+
+* Zimny DB
+
+# Dla Ruch 10 zimny:
+net stop OracleServiceXE
+ls /cygdrive/e/oraclexe/app/oracle/product/
+mkdir /cygdrive/e/naprawa_"$(date '+%d-%b-%Y')"_tsn
+cp -r /cygdrive/e/oraclexe/oradata /cygdrive/e/naprawa_"$(date '+%d-%b-%Y')"_tsn
+cp -r /cygdrive/e/oraclexe/app/oracle/flash_recovery_area /cygdrive/e/naprawa_"$(date '+%d-%b-%Y')"_tsn
+cp -r /cygdrive/e/oraclexe/app/oracle/product/10.2.0/server/dbs /cygdrive/e/naprawa_"$(date '+%d-%b-%Y')"_tsn
+cp -r /cygdrive/f/Backup/XE/ONLINELOG /cygdrive/e/naprawa_"$(date '+%d-%b-%Y')"_tsn
+
+# Czasami to inny katalog jest
+cp -r /cygdrive/e/oraclexe/app/oradata /cygdrive/e/naprawa_"$(date '+%d-%b-%Y')"_tsn
+
+# Dla Ruch 11 zimny:
+net stop OracleServiceXE
+ls /cygdrive/e/oraclexe/app/oracle/product/
+mkdir /cygdrive/e/naprawa_"$(date '+%d-%b-%Y')"_tsn
+
+cp -r /cygdrive/e/oraclexe/app/oracle/oradata /cygdrive/e/naprawa_"$(date '+%d-%b-%Y')"_tsn
+cp -r /cygdrive/e/oraclexe/app/oracle/fast_recovery_area /cygdrive/e/naprawa_"$(date '+%d-%b-%Y')"_tsn
+cp -r /cygdrive/e/oraclexe/app/oracle/product/11.2.0/server/dbs /cygdrive/e/naprawa_"$(date '+%d-%b-%Y')"_tsn
+cp -r /cygdrive/f/Backup/XE/ONLINELOG /cygdrive/e/naprawa_"$(date '+%d-%b-%Y')"_tsn
+
+mv /cygdrive/d/aplikacje/forcom/market/Market.exe /cygdrive/d/aplikacje/forcom/market/Market_.exe
+mv /cygdrive/d/aplikacje/forcom/market/Market_.exe /cygdrive/d/aplikacje/forcom/market/Market.exe
+# ============================================================
+
+# Dla HDS Oracle10 zimny:                # ls /cygdrive/e/oraclexe/app/oracle/product/
+net stop OracleServiceXE
+mv /cygdrive/d/aplikacje/forcom/market/Market.exe /cygdrive/d/aplikacje/forcom/market/Market_.exe
+mv /cygdrive/d/aplikacje/forcom/market/Market_.exe /cygdrive/d/aplikacje/forcom/market/Market.exe
+
+mkdir /cygdrive/e/naprawa_"$(date '+%d-%b-%Y')"_tsn
+
+cp -r /cygdrive/e/oraclexe/oradata /cygdrive/e/naprawa_"$(date '+%d-%b-%Y')"_tsn
+cp -r /cygdrive/e/oraclexe/app/oracle/flash_recovery_area /cygdrive/e/naprawa_"$(date '+%d-%b-%Y')"_tsn
+cp -r /cygdrive/e/oraclexe/app/oracle/product/10.2.0/server/dbs /cygdrive/e/naprawa_"$(date '+%d-%b-%Y')"_tsn
+cp -r /cygdrive/q/backup/XE/ONLINELOG /cygdrive/e/naprawa_"$(date '+%d-%b-%Y')"_tsn
+
+# Dla HDS Oracle11 zimny:                # ls /cygdrive/e/oraclexe/app/oracle/product/
+cp -r /cygdrive/e/oraclexe/app/oracle/oradata /cygdrive/e/naprawa_"$(date '+%d-%b-%Y')"_tsn
+cp -r /cygdrive/e/oraclexe/app/oracle/fast_recovery_area /cygdrive/e/naprawa_"$(date '+%d-%b-%Y')"_tsn
+cp -r /cygdrive/e/oraclexe/app/oracle/product/11.2.0/server/dbs /cygdrive/e/naprawa_"$(date '+%d-%b-%Y')"_tsn
+cp -r /cygdrive/q/backup/XE/ONLINELOG /cygdrive/e/naprawa_"$(date '+%d-%b-%Y')"_tsn
+
+du -ach /cygdrive/e/naprawa_"$(date '+%d-%b-%Y')"_tsn
+net start OracleServiceXE
+
+# Dla HDS Oracle18 zimny:                # ls /cygdrive/e/oraclexe/app/oracle/product/
+cp -r /cygdrive/e/oraclexe/app/oracle/product/18.0.0/oradata/XE /cygdrive/e/naprawa_"$(date '+%d-%b-%Y')"_tsn
+cp -r /cygdrive/q/backup/XE/ONLINELOG /cygdrive/e/naprawa_"$(date '+%d-%b-%Y')"_tsn
+
+du -ach /cygdrive/e/naprawa_"$(date '+%d-%b-%Y')"_tsn
+net start OracleServiceXE
+
+# Dla Rossmann Oracle11 zimny:
+net stop oracleservicexe /y
+mkdir C:\naprawa_tsn
+xcopy C:\oraclexe\app\oracle\oradata C:\naprawa_tsn /E/I
+xcopy C:\oraclexe\app\oracle\fast_recovery_area C:\naprawa_tsn /E/I
+dir C:\naprawa_tsn /S
+# ============================================================
+
+* Zmiana hasła dla użytkownika
+
+ALTER PROFILE DEFAULT LIMIT PASSWORD_LIFE_TIME UNLIMITED;
+alter user market_user identified by for8667319com;
+alter user cashregisterserver identified by for8667319com;
+ALTER USER market_user ACCOUNT UNLOCK;
+alter user sys identified by ossefhds;
+
+* ANAL "with cocounut oil" 
+wget ftp://market:65434ruch@10.100.3.17/public/tsn/analyze.sql
+wget ftp://market:65434ruch@10.100.3.17/public/tsn/analyze_old.sql
+sqlplus / as sysdba @c:/temp/analyze.sql
+sqlplus / as sysdba @c:/temp/analyze_old.sql
+sqlplus / as sysdba @c:/temp/move_m2.sql
+
+# rebuild wszystkich unusable indeksów
+select 'alter index '||index_name||' rebuild;' from user_indexes where status = 'UNUSABLE';
+
+* Import/Export DB (exp,imp,expdp,impdp)
+exp market3_user/for8667319com FILE=market.dmp LOG=m.log full=y
+imp market_user/for8667319com FILE=63602_market_user_20200716-040019.dmp LOG=market_import.log full=y
+exp cashregisterserver/for8667319com FILE=sk.dmp LOG=sk.log
+
+imp market_user/for8667319com FILE=41179_market_user_20211222-040007.dmp LOG=market_import.log
+
+# Wciąganie z datapump
+create user test identified by for8667319com default tablespace USERS;
+grant create any table to test;
+grant create any view to test;
+grant create any procedure to test;
+grant create any sequence to test;
+grant create any trigger to test;
+grant create any type to test;
+grant resource, connect to test;
+grant debug connect session to test;
+grant create any synonym to test;
+grant execute on dbms_alert to test;
+grant execute on dbms_pipe to test;
+grant create database link to test;
+grant execute on dbms_alert to test;
+grant execute on dbms_pipe to test;
+GRANT READ, WRITE ON DIRECTORY DUMP_DAILY_DIR TO test;
+
+HOST IF not EXIST C:\temp MKDIR C:\temp
+CREATE OR REPLACE DIRECTORY DUMP_TEMP AS 'C:\temp';
+GRANT READ, WRITE ON DIRECTORY DUMP_TEMP TO MARKET_USER;
+GRANT READ, WRITE ON DIRECTORY DUMP_TEMP TO test2;
+
+# Przykłady wykonania DUMPA
+impdp market_user/for8667319com@xe DIRECTORY=DUMP_DAILY_DIR DUMPFILE=DUMP_20191127_013003.DMP full=y LOGFILE=imp.log
+impdp market_user/for8667319com@xe DIRECTORY=DUMP_DAILY_DIR DUMPFILE=DUMP_20191212_072209.DMP full=y LOGFILE=impdp.log
+# zwyczajny datapump
+impdp market_user/for8667319com@xe DIRECTORY=DUMP_DAILY_DIR DUMPFILE=DUMP_20180517_033001.DMP full=y LOGFILE=imp_.log
+# określona tabela
+impdp market_user/for8667319com@xe DIRECTORY=DUMP_DAILY_DIR DUMPFILE=DUMP_20180308_013002.DMP TABLES=PICTURE LOGFILE=imp_pic.log
+expdp market_user/for8667319com@xe DIRECTORY=DUMP_DAILY_DIR DUMPFILE=m.dmp logfile=m.log
+expdp cashregisterserver/for8667319com@xe DIRECTORY=DUMP_DAILY_DIR DUMPFILE=c.dmp
+exp market3_user/for8667319com FILE=c:\temp\PLUCODE_niedziela.dmp LOG=c:\temp\PLUCODE_niedziela.log TABLES=PLUCODE;
+exp market_user/for8667319com FILE=market.dmp LOG=market.log;
+exp cashregisterserver/for8667319com FILE=cashregister.dmp LOG=cashregister.log;
+# wciąganie dumpa na innego użytkownika np. na ruch
+create user test identified by for8667319com default tablespace users;
+grant resource, connect, CREATE DATABASE LINK, CREATE PUBLIC SYNONYM, CREATE SYNONYM, CREATE TYPE, CREATE MATERIALIZED VIEW, CREATE ROLE, CREATE TABLE, CREATE VIEW, CREATE PROCEDURE, CREATE SEQUENCE, CREATE TRIGGER to test;
+grant execute on dbms_alert to test;
+grant execute on dbms_pipe to test;
+GRANT READ, WRITE ON DIRECTORY DUMP_DAILY_DIR TO TEST;
+cd /cygdrive/g
+7z e DUMP_20210720_023006.DMP.ZIP
+
+impdp test/for8667319com@xe DIRECTORY=DUMP_DAILY_DIR DUMPFILE=DUMP_20210720_023006.DMP LOGFILE=imp.log remap_schema=market_user:test
+
+* Weryfikacja plików DB dbv.exe
+
+cd /cygdrive/e/oraclexe/oradata/XE
+dbv.exe FILE=CONTROL.DBF blocksize = 16384
+dbv.exe FILE=SYSAUX.DBF blocksize = 8192
+dbv.exe FILE=SYSTEM.DBF blocksize = 8192
+dbv.exe FILE=UNDOTBS1.DBF blocksize = 8192
+dbv.exe FILE=UNDO.DBF blocksize = 8192
+dbv.exe FILE=USERS.DBF blocksize = 8192
+
+* Uszkodzony plik kontrolny
+restore controlfile from autobackup;
+restore controlfile from 'f:\Backup\XE\BACKUPSET\2021_07_05\CONTROL_2021_07_05_03_01.KG035LE1_1_1';
+restore controlfile from 'f:\Backup\XE\BACKUPSET\2021_07_21\CONTROL_2021_07_21_03_01.KF04FRJD_1_1';
+
+* ORA-30036: unable to extend segment by 8 in undo tablespace 'UNDO'
+alter database datafile 'e:/oraclexe/app/oracle/oradata/XE/UNDOTBS1.DBF' offline drop;
+create UNDO tablespace UNDOTBS1 datafile 'e:/oraclexe/app/oracle/oradata/XE/UNDOTBS1.dbf' size 25m autoextend on next 1m maxsize 4096m;
+drop tablespace UNDOTBS1 including contents and datafiles;
+
+* Weryfikacja zajętości poszczególnych plików bazodanowych
+select
+  a.tablespace_name,
+  sum(a.bytes)/(1024*1024) total_space_MB,
+  round(b.free,2) Free_space_MB,
+  round(b.free/(sum(a.bytes)/(1024*1024))* 100,2) percent_free
+ from dba_data_files a,
+  (select tablespace_name,sum(bytes)/(1024*1024) free  from dba_free_space
+  group by tablespace_name) b
+ where a.tablespace_name = b.tablespace_name(+)
+  group by a.tablespace_name,b.free;
+
+alter database datafile 'E:\oraclexe\oradata\XE\undo.dbf' resize 3056m;
+alter database datafile 'E:\oraclexe\oradata\XE\UNDO.dbf' resize 4096m;
+alter database datafile 'E:\oraclexe\app\oracle\oradata\XE\UNDOTBS1.dbf' resize 4096m;
+
+select tablespace_name, contents from dba_tablespaces where contents = 'UNDO';
+show parameter undo_tablespace;
+show parameter undo_management;
+
+* Przywrócenie controlfile z backupu, ORA-01207
+# usunięcie control.dbf
+rman target /
+restore controlfile from autobackup;
+mount database;
+recover database;
+alter database open;
+alter database open resetlogs;
+
+* Recover do daty
+run {
+set until time "to_date('2018-09-27 23:00:00','yyyy-mm-dd hh24:mi:ss')";
+restore database;
+recover database;
+}
+
+* Restore recover do sekwencji
+Restore Database Until Sequence 609;
+Recover Database Until Sequence 609;
+restore database from TAG='TAG20210704T030112';
+recover database until time "to_date('2017-12-29 23:00:00','yyyy-mm-dd hh24:mi:ss')";
+
+* Zmiana inkarnacji bazy
+# problem z przekręconymi archivelogami po resetlogs, zmiana inkarnacji bazy danych
+list incarnation;
+reset database to incarnation 2;
+# Czasami jednak lepiej jest cofnąć się do zimnego
+
+* Przepełniona przestrzeń recovery area, db_recovery_file_dest_size
+# ORA-19815: WARNING: db_recovery_file_dest_size of 64424509440 bytes is 100.00% used, and has 0 remaining bytes available.
+# ORA-19809: limit exceeded for recovery files
+
+# Sprawdzenie rozmiarów wolnego miejsca tabel bazy danych SQL
+show parameter db_recovery;
+# jeśli walnie ORA-01034: Oracle not available to można startup mount force;
+select * from v$flash_recovery_area_usage;
+select * from v$recovery_file_dest;
+# zwiększanie rozmiaru file recovery file w sqlplus
+alter system set db_recovery_file_dest_size = 170g;
+rman target /
+crosscheck backup;
+delete noprompt expired backupset;
+crosscheck archivelog all;
+delete noprompt expired archivelog all;
+
+exec dbms_scheduler.run_job('MK_BACKUP');
+
+C:\ORACLEXE\APP\ORACLE\PRODUCT\11.2.0\SERVER\DATABASE\OXE_BACKUP_CURRENT.LOG
+# Poszerzono przestrzeń_recovery. Posprzątano na dysku Q. Usunięto przestarzałe archivelogi i backupsety. Wykonano poprawnie backup bazy danych. Uruchomiono usługi. Sprawdź za kilka dni jak sytuacja się będzie klarowała.
+
+* Wykonanie crosschecka na ruchu ze skryptu
+cd /cygdrive/e/Dane/market/UPDATES/;
+rm crosscheck.rman;
+wget ftp://market:65434ruch@10.100.3.17/SND/crosscheck.rman;
+cmd /c "rman @e:\Dane\market\UPDATES\crosscheck.rman"
+
+* Uszkodzenie SYSAUX, WRI$_OPTSTAT_OPR
+# RMAN-03009: niepowodzenie polecenia backup dla kana▒u ORA_DISK_1 w 01/10/2022 11:27:56
+# ORA-19566: przekroczony limit 0 uszkodzonych blok▒w dla pliku E:\ORACLEXE\APP\ORACLE\PRODUCT\18.0.0\ORADATA\XE\SYSAUX01.DBF
+# ORA-01578: blok danych ORACLE jest uszkodzony (plik nr. 3, blok nr. 21063)
+# ORA-01110: plik danych 3: 'E:\ORACLEXE\APP\ORACLE\PRODUCT\18.0.0\ORADATA\XE\SYSAUX01.DBF'
+
+alter index I_WRI$_OPTSTAT_OPR_TASKS_OPOBJ rebuild compute statistics
+I_WRI$_OPTSTAT_OPR_TASKS_OPOBJ
+WRI$_OPTSTAT_OPR
+alter index I_WRI$_OPTSTAT_OPR_TASKS_OPOBJ rebuild;
+DROP INDEX I_WRI$_OPTSTAT_OPR_TASKS_OPOBJ;
+CREATE INDEX I_WRI$_OPTSTAT_OPR_TASKS_OPOBJ ON SYS.WRI$_OPTSTAT_OPR_TASKS(OP_ID, TARGET_OBJN) ;
+
+# ale ostatnio Haufa robił i zadziałało dopiero z poziomu sqlplus
+
+alter table WRI$_OPTSTAT_OPR_TASKS move;
+alter index I_WRI$_OPTSTAT_OPR_TASKS_OPID rebuild;
+alter index I_WRI$_OPTSTAT_OPR_TASKS_OPOBJ rebuild;
+alter index I_WRI$_OPTSTAT_OPR_TASKS_STIME rebuild;
+alter index I_WRI$_OPTSTAT_OPR_TASKS_TGST rebuild;
+
+exec dbms_stats.purge_stats(sysdate);
+
+* Wolne miejsce na bazie 
+# przepełniona przestrzeń tabel, pliku uwaga na ruchu nie zrzucać picture
+delete from textlog where RowID in (select RowID from textlog where rownum <= 1000);
+alter table textlog enable row movement;
+alter table textlog shrink space cascade;
+alter table textlog disable row movement;
+
+# weryfikacja zajętości poszczególnych tabel posegregowana od największej wartości, odpalamy na sys
+select DE.owner, DE.tablespace_name, DE.segment_type, DE.Segment_name, DDF.file_name, DDF.file_id, (SUM(DE.Bytes)/1024/1024)SIZE_MB
+from dba_extents DE, dba_data_files DDF
+where DE.tablespace_name = 'USERS' and
+DDF.file_id = DE.file_id
+group by DE.owner, DE.tablespace_name, DE.segment_type, DE.segment_name, DDF.file_name, DDF.file_id
+order by 7 desc ;
+
+# wolne miejsce 5 plików bazodanowych, na sys:
+select b.tablespace_name, tbs_size SizeMb, a.free_space FreeMb from
+(select tablespace_name, round(sum(bytes)/1024/1024 ,2) as free_space
+from dba_free_space group by tablespace_name) a,
+(select tablespace_name, sum(bytes)/1024/1024 as tbs_size
+from dba_data_files group by tablespace_name UNION
+select tablespace_name, sum(bytes)/1024/1024 tbs_size
+from dba_temp_files group by tablespace_name ) b
+where a.tablespace_name(+)=b.tablespace_name;
+
+# High water mark:
+select tablespace_name,
+file_id,  file_name DATA_FILE_NAME, Allocated_MBYTES, High_Water_Mark_MBYTES, FREE_MBYTES, trunc((FREE_MBYTES/Allocated_MBYTES)*100,2) "% Free",   trunc(Allocated_MBYTES-High_Water_Mark_MBYTES,2) Resizable
+from   (select ddf.tablespace_name tablespace_name,  ddf.file_id file_id, ddf.file_name file_name, ddf.bytes/1024/1024 Allocated_MBYTES, trunc((ex.hwm*(dt.block_size))/1024/1024,2) High_Water_Mark_MBYTES,
+FREE_MBYTES from dba_data_files ddf, dba_tablespaces dt,( select file_id, sum(bytes/1024/1024) FREE_MBYTES from dba_free_space group by file_id
+) free, ( select file_id, max(block_id+blocks) hwm  from dba_extents  group by file_id ) ex where ddf.file_id = ex.file_id and ddf.tablespace_name = dt.tablespace_name and ddf.file_id = free.file_id (+)
+order by ddf.tablespace_name, ddf.file_id );
+
+# sprawdź co zawiera syslob
+SELECT *  FROM dba_lobs WHERE segment_name = 'SYS_LOB0000094273C00005$$'  ;
+
+# resize mex
+ALTER DATABASE DATAFILE 'C:\FORCOM\ORACLEXE\PRODUCT\18.0.0\ORADATA\XE\UNDOTBS01.DBF' RESIZE 300M;
+
+select
+   a.tablespace_name,
+   round(a.bytes_alloc / 1024 / 1024, 2) megs_alloc,
+   round(nvl(b.bytes_free, 0) / 1024 / 1024, 2) megs_free,
+   round((a.bytes_alloc - nvl(b.bytes_free, 0)) / 1024 / 1024, 2) megs_used,
+   round((nvl(b.bytes_free, 0) / a.bytes_alloc) * 100,2) Pct_Free,
+   100 - round((nvl(b.bytes_free, 0) / a.bytes_alloc) * 100,2) Pct_used,
+   round(maxbytes/1048576,2) Max
+   from ( select f.tablespace_name, sum(f.bytes) bytes_alloc,
+   sum(decode(f.autoextensible, 'YES',f.maxbytes,'NO', f.bytes)) maxbytes
+from
+   dba_data_files f
+group by
+   tablespace_name) a,
+(  select
+      f.tablespace_name,
+      sum(f.bytes) bytes_free
+   from
+      dba_free_space f
+group by
+      tablespace_name) b
+where
+      a.tablespace_name = b.tablespace_name (+)
+union
+select
+   h.tablespace_name,
+   round(sum(h.bytes_free + h.bytes_used) / 1048576, 2),
+   round(sum((h.bytes_free + h.bytes_used) - nvl(p.bytes_used, 0)) / 1048576, 2),
+   round(sum(nvl(p.bytes_used, 0))/ 1048576, 2),
+   round((sum((h.bytes_free + h.bytes_used) - nvl(p.bytes_used, 0)) /
+   sum(h.bytes_used + h.bytes_free)) * 100,2),
+   100 - round((sum((h.bytes_free + h.bytes_used) - nvl(p.bytes_used, 0)) /
+   sum(h.bytes_used + h.bytes_free)) * 100,2),
+   round(max(h.bytes_used + h.bytes_free) / 1048576, 2)
+from
+   sys.v_$TEMP_SPACE_HEADER h, sys.v_$Temp_extent_pool p
+where
+   p.file_id(+) = h.file_id
+and
+   p.tablespace_name(+) = h.tablespace_name
+group by
+   h.tablespace_name
+ORDER BY 1;
+
+select
+   tablespace_name,
+   maxbytes/1024/1024 max_meg
+from
+   dba_data_files;
+
+select
+   tablespace_name,
+   count(*)       nbr_data_files,
+   sum(maxblocks) maxbytes
+from
+   dba_data_files
+group by
+   tablespace_name;
+
+select
+(  select
+   decode(extent_management,'LOCAL','*',' ') ||
+   decode(segment_space_management,'AUTO','a ','m ')
+from
+   dba_tablespaces
+where
+   tablespace_name = b.tablespace_name) || nvl(b.tablespace_name,
+   nvl(a.tablespace_name,'UNKOWN')) name,
+   MB_Allocated MB_Allocated,
+   MB_Allocated-nvl(Free_MB,0) used,
+   nvl(Free_MB,0) free,
+   (  (MB_Allocated-nvl(Free_MB,0))/
+       nvl(Max_MB,MB_Allocated))*100 pct_used,
+       nvl(Max_MB,MB_Allocated) Max_Size,
+       decode( Max_MB, 0, 0, (MB_Allocated/Max_MB)*100) pct_max_used
+       from ( select sum(bytes)/1048576 Free_MB,
+       max(bytes)/1048576 largest,
+       tablespace_name
+     from
+        sys.dba_free_space
+     group by
+        tablespace_name ) a,
+   ( select
+        sum(bytes)/1048576 MB_Allocated,
+        sum(maxbytes)/1048576 Max_MB,
+        tablespace_name
+     from
+        sys.dba_data_files
+     group by
+        tablespace_name
+union all
+select
+   sum(bytes)/1048576 MB_Allocated,
+   sum(maxbytes)/1048576 Max_MB,
+    tablespace_name
+from
+   sys.dba_temp_files
+group by
+   tablespace_name )b
+where
+a.tablespace_name (+) = b.tablespace_name
+order by 1;
+
+# przerośnięty plik temp.dbf
+create temporary tablespace temp2 tempfile 'c:\oraclexe\app\oracle\oradata\xe\temp2.dbf' size 100m reuse autoextend on next 1m maxsize 5g extent management local uniform size 1m;
+alter database default temporary tablespace temp2;
+drop tablespace temp including contents and datafiles
+create temporary tablespace temp tempfile 'c:\oraclexe\app\oracle\oradata\xe\temp.dbf' size 100m reuse autoextend on next 1m maxsize 5g extent management local uniform size 1m;
+alter database default temporary tablespace temp;
+drop tablespace temp2 including contents and datafiles;
+
+* BLOCK CORRUPT DETECTION
+# sprawdzenie który indeks w bloku jest uszkodzony
+select tablespace_name, segment_type, owner, segment_name from dba_extents where file_id = 4 and 105854 between block_id AND block_id + blocks-1;
+
+* Przepięcie REDO, ORA-00333, itp.
+select l.status, member from v$logfile inner join v$log l using (group#);
+# (wybrać current) np. (C:\BACKUP\XE\ONLINELOG\O1_MF_3_DPWMV55Q_.LOG)
+recover database using backup controlfile;
+# ścieżka onlinelogu pełnej nazwy pliku
+alter database open resetlogs;
+alter system switch logfile;
+# ORA-00310: archived log contains sequence 26979; sequence 26980 required 
+# cofnąć sprzed sekwencji = required
+Restore Database Until Sequence 114451;
+Recover Database Until Sequence 114451;
+
+# druga wersja, rzadziej testowana z przełączeniem
+select * from v$log;
+# Jeśli jest jakiś INACTIVE, można zrobić:
+ALTER DATABASE CLEAR UNARCHIVED LOGFILE GROUP 1;
+# Następnie'
+alter database open resetlogs;
+alter system switch logfile;
+
+* CATALOG-owanie plików bazo-danowych
+catalog backuppiece 'F:\BACKUP\XE\BACKUPSET\2021_07_18\DATA_2021_07_18_03_01_LEVEL1.HL047UA3_1_1';
+catalog backuppiece 'F:\BACKUP\XE\BACKUPSET\2021_07_18\DATA_2021_07_18_03_01_LEVEL1.HL047UA3_1_1';
+catalog archivelog 'F:\BACKUP\XE\ARCHIVELOG\2021_07_22\O1_MF_1_315_JHKPD6H8_.ARC';
+
+* Naprawa uszkodzonej tabeli TOWAR z pomocą tabela PRODUCT_STOCK_INFO
+# Tabela ma tyle samo wierszy, więc jeśli nie możemy usunąć tego wiersza ani go update-ować ani wyświetlić uszkodzonej wartości
+# To możemy zrobić kopię tabeli towar, usunąć ten wiersz
+delete TOWAR_BACKUP3 t where t.NSECURITYWEIGHT<0;
+# i zapytaniem:
+select p.PRODUCT_ID from PRODUCT_STOCK_INFO p where PRODUCT_ID not in (select t.LTOWARREF from TOWAR_BACKUP3 t);
+# sprawdzamy jaki wiersz nam brakuje, wtedy na innym sklepie możemy wyswietlić po PLU co to za towar i zainsertować poprawiając LTOWARREF
+
+* Zmiana lokalizacji onlinelog, redolog.
+ALTER DATABASE RENAME FILE 'E:\oraclexe\app\oracle\fast_recovery_area\XE\ONLINELOG\O1_MF_1_GGHDBO5P_.LOG' to 'F:\backup\XE\ONLINELOG\O1_MF_1_GGHDBO5P_.LOG';
+ALTER DATABASE RENAME FILE 'E:\oraclexe\app\oracle\fast_recovery_area\XE\ONLINELOG\O1_MF_2_GGHDBPHY_.LOG' to 'F:\backup\XE\ONLINELOG\O1_MF_2_GGHDBPHY_.LOG';
+
+* Inne, różne, mniej ważne
+# Sposób Trojana na ORA-600 bez argumentów i podobne:
+spool ora600_fix.log
+set pages 10000
+select * from v$instance ;
+show parameter instance_name
+select * from recent_resource_incarnations$ ;
+create table recent_resource_incarnation$bk as select * from recent_resource_incarnations$;
+truncate table recent_resource_incarnations$;
+spool off
+exit
+
+# uszkodzona tabela, kopia tabeli i przywrócenie z backupu
+'- zimny'
+select * from PLU;
+CREATE TABLE PLU_BACKUP AS
+  (SELECT * FROM PLU);
+select count(*) from PLU;
+select count(*) from PLU_BACKUP;
+call disableallconstraints();
+truncate table PLU;
+insert into PLU select * from PLU_BACKUP;
+call enableallconstraints();
+analyze table market_user.towar validate structure cascade;
+SELECT uc.owner, uc.constraint_name, uc.status, uc.LAST_CHANGE FROM USER_CONSTRAINTS uc;
+SELECT count(*) FROM USER_CONSTRAINTS uc;
+
+# Jeśi podczas create table as select wywala się ORA-01578 data block corrupted będziemy musieli dzielić na pół'
+# To samo w sytuacji ORA-00600:internal error code, arguments: [kafspa:columnBuffer1], [3855, [22]]'
+# ORA-12899: value too large for column BINCREASEDRISK (actual 223) maximum 23
+update towar_backup t set t.PRODUCTCATEGORY=null where 1=1;
+# Przy błędzie:
+IMP-00017 IMP-00003 ORA-06550 PLS-00103 ORA-20001 ORA-06512
+# imp market_user/for8667319com FILE=c:\Temp\__hds\31145\m12.dmp statistics=recalculate
+# koniecznie z opcj?statistics=recalculate
+
+# NA HDS --> ORA-00600: internal error code, arguments: [kccpb_sanity_check_2], [299249], [299248], [0x0], [], [], [], []
+restore controlfile from 'q:\Backup\XE\BACKUPSET\2018_09_27\O1_MF_NNNDF_TAG20180927T010008_FTR3VSJ3_.BKP';
+restore controlfile from 'q:\Backup\XE\AUTOBACKUP\2018_09_27\O1_MF_S_987901274_FTR3XTFO_.BKP';
+restore controlfile from 'q:\Backup\XE\BACKUPSET\2017_03_02\CONTROL_2017_03_02_02_01.ICRU38DB_1_1';
+startup mount;
+restore database;
+recover database;
