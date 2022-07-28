@@ -1,6 +1,0 @@
-2022/07/26-09:01:06.744 b7544 Creating DB /home/tnowacki/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb since it was missing.
-2022/07/26-09:01:06.807 b7544 Delete type=3 #1
-2022/07/26-09:08:29.996 ba5a0 Level-0 table #5: started
-2022/07/26-09:08:30.002 ba5a0 Level-0 table #5: 95636 bytes OK
-2022/07/26-09:08:30.005 ba5a0 Delete type=0 #3
-2022/07/26-09:08:30.005 ba5a4 Manual compaction at level-0 from (begin) .. (end); will stop at (end)
